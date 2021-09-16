@@ -2,49 +2,52 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Note Board</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/3617a89b26.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Note Board</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://kit.fontawesome.com/3617a89b26.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-            <a href="#">Note Board</a>
-        </div>
+  <header>
+    <div class="header-box">
+      <div class="logo">
+        <a href="#">Note Board</a>
+      </div>
 
+      <div class="header-box-right">
         <div class="appearance">
-            <div class="theme-switcher">
-                <i class="fas fa-lightbulb"></i>
+          <div class="theme-switcher-icon">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+
+          <div class="color-switcher">
+            <div class="color-switcher-icon">
+              <i class="fas fa-palette"></i>
             </div>
 
-            <div class="color-switcher">
-                <div class="color-switcher-icon">
-                    <i class="fas fa-palette"></i>
-                </div>
+            <div class="color-switcher-dropdown open">
+              <h3>Choose your color</h3>
 
-                <div class="color-switcher-dropdown">
-                    <h3>Choose your color preferance</h3>
+              <div class="btn-box">
 
-                    <button class="color blue active"></button>
-                    <button class="color purple"></button>
-                    <button class="color green"></button>
-                </div>
+                <button class="color active blue"></button>
+                <button class="color purple"></button>
+                <button class="color green"></button>
+
+              </div>
             </div>
-
+          </div>
         </div>
 
         <div class="login-signup">
-            <a href="#">Login</a>
+          <a href="#">Login</a>
         </div>
-    </header>
-
-
-
-
+      </div>
+    </div>
+  </header>
 </body>
 
 </html>
