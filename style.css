@@ -9,10 +9,10 @@
 }
 
 :root {
-  --white: rgb(240, 240, 240);
-  --dark: rgb(161, 66, 91);
-  --light: rgb(192, 78, 108);
-  --hover: rgb(161, 66, 91, 0.4);
+  --white: #eee8d5;
+  --light: #f1cd57;
+  --dark: #e0bf51;
+  --hover: #d1b24c;
 }
 
 body {
@@ -44,7 +44,7 @@ header .header-box {
   padding: 0 24px;
 
   border-radius: 12px;
-  background-color: var(--dark);
+  /* background-color: var(--dark); */
   cursor: pointer;
 }
 
@@ -94,10 +94,12 @@ header .header-box {
 }
 
 .appearance .color-switcher-dropdown {
+  opacity: 0;
   padding: 12px;
   width: 204px;
   position: absolute;
-  top: -200px;
+  top: 48px;
+  left: -60px;
   border-radius: 12px;
   background-color: var(--light);
   box-shadow: 0 2px 6px 3px rgba(0, 0, 0, 0.2);
@@ -105,6 +107,7 @@ header .header-box {
 }
 
 .color-switcher-dropdown.open {
+  opacity: 1;
   top: 66px;
   left: -60px;
   pointer-events: auto;
@@ -135,7 +138,7 @@ header .header-box {
 }
 
 .color-switcher-dropdown button.blue {
-  background-color: blue;
+  background-color: #f1cd57;
 }
 .color-switcher-dropdown button.purple {
   background-color: purple;
@@ -161,7 +164,7 @@ header .header-box {
   cursor: pointer;
 }
 
-header .logo:hover,
+/* header .logo:hover, */
 .header-box-right .login-signup:hover,
 .appearance .theme-switcher-icon:hover,
 .appearance .color-switcher-icon:hover {
