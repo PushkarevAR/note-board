@@ -1,0 +1,100 @@
+main {
+    position: relative;
+  /* height: 100%; */
+  max-width: 1200px;
+
+  margin: auto;
+  padding: 72px 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+}
+
+main .intro {
+  margin-top: 60px;
+  height: 300px;
+  display: flex;
+  position: relative;
+}
+
+.intro .intro-text {
+  width: 720px;
+}
+
+.intro .intro-text h1 {
+  font-size: 48px;
+  color: var(--black);
+}
+
+.intro .intro-text span {
+  color: var(--main);
+}
+
+.intro .intro-text p {
+  font-size: 24px;
+  color: var(--black);
+}
+
+.intro.dark .intro-text h1 {
+    color: var(--white);
+  }
+  
+  .intro.dark .intro-text span {
+    color: var(--white);
+  }
+  
+  .intro.dark .intro-text p {
+    color: var(--white);
+  }
+
+.intro .btn {
+  margin-top: 24px;
+  width: 200px;
+  line-height: 48px;
+  text-align: center;
+  border-radius: 12px;
+  background-color: var(--main);
+  cursor: pointer;
+}
+
+.intro .btn a {
+  color: var(--white);
+  font-size: 24px;
+  text-decoration: none;
+}
+
+.intro .btn:hover {
+  background-color: var(--main-hover);
+}
+
+.intro .note {
+  width: 360px;
+  margin-left: 60px;
+  margin-top: 40px;
+  border-radius: 12px;
+  border: 4px solid var(--main);
+  padding: 12px;
+  box-shadow: 0 2px 12px 3px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  color: var(--black);
+}
+
+.intro.dark .note{
+    color: var(--white);
+}
+
+.note p::before {
+  content: "";
+  margin: 6px 0 12px 0;
+  display: block;
+  width: 328px;
+  height: 2px;
+  background: var(--main);
+  align-items: center;
+}
+
+/* .intro-text.dark h1{
+    color: var(--white);
+} */
