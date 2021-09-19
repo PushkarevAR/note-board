@@ -1,0 +1,76 @@
+/* ---------------------------- tag main prop ---------------------------- */
+main {
+  position: relative;
+  max-width: 1200px;
+  margin: auto;
+  padding: 72px 24px;
+  z-index: 1;
+}
+/* ---------------------------- tag main prop ---------------------------- */
+.intro {
+  margin-top: 60px;
+  height: 300px;
+  display: flex;
+  position: relative;
+}
+
+.intro .intro-text {
+  width: 720px;
+}
+
+.intro .intro-text h1 {
+  font-size: 48px;
+  color: var(--black);
+}
+
+.intro .intro-text span {
+  color: var(--main);
+}
+
+.intro .intro-text p {
+  font-size: 24px;
+  color: var(--black);
+}
+
+.intro .btn {
+  margin-top: 24px;
+  height: 48px;
+  width: 200px;
+  line-height: 48px;
+  text-align: center;
+  border-radius: 12px;
+  background-color: var(--main);
+  cursor: pointer;
+}
+
+.intro .btn a {
+  color: var(--white);
+  font-size: 24px;
+  text-decoration: none;
+}
+
+.intro .btn:hover {
+  background-color: var(--main-hover);
+}
+
+/* ---------------------------- Intro note ---------------------------- */
+.intro .note{
+  width: 360px;
+  height: auto;
+  margin-top: 40px;
+  position: absolute;
+  right: 0;
+}
+
+/* ---------------------------- Dark theme props ---------------------------- */
+.intro.dark .intro-text h1 {
+  color: var(--white);
+}
+
+.intro.dark .intro-text span {
+  color: var(--white);
+}
+
+.intro.dark .intro-text p {
+  color: var(--white);
+}

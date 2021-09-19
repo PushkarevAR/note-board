@@ -1,0 +1,117 @@
+main .notes-wrapper{
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+
+}
+
+.notes-box::before {
+  content: "";
+  margin: 6px 0 12px 0;
+  display: block;
+  width: 328px;
+  height: 2px;
+  background: var(--main);
+  align-items: center;
+}
+
+.note {
+  position: relative;
+  height: 100%;
+  max-width: 400px;
+  border-radius: 12px;
+  border: 4px solid var(--main);
+  padding: 12px;
+  box-shadow: 0 2px 12px 3px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  color: var(--black);
+  font-size: 30px;
+
+  overflow: hidden;
+}
+
+.note h3 {
+  color: var(--black);
+  font-size: 24px;
+}
+
+.note p {
+  color: var(--black);
+  font-size: 18px;
+}
+
+.note i {
+  color: var(--black);
+  right: 12px;
+  position: absolute;
+}
+
+.note input{
+  height: 36px;
+  width: 280px;
+  padding-left: 12px;
+  display: block;
+  margin: 12px 0;
+  outline: none;
+  border-radius: 12px;
+  border: 2px solid var(--main);
+  background-color: var(--white);
+}
+
+.note textarea{
+  width: 100%;
+  resize: none;
+  overflow: hidden;
+
+  min-height: 100px;
+  max-height: 360px;
+
+  outline: none;
+  padding-left: 12px;
+  font-size: 18px;
+  border-radius: 12px;
+  border: 2px solid var(--light-bg);
+}
+
+.note p::before {
+  content: "";
+  margin: 6px 0 12px 0;
+  display: block;
+  width: 328px;
+  height: 2px;
+  background: var(--main);
+  align-items: center;
+}
+
+.note button{
+  float: right;
+
+  height: 36px;
+  width: 120px;
+
+  line-height: 38px;
+  font-size: 18px;
+  color: var(--white);
+  background-color: var(--main);
+  border-radius: 12px;
+  outline: none;
+  border: none;
+}
+
+/* ---------------------------- Dark theme props ---------------------------- */
+.intro.dark .note h3 {
+  color: var(--white);
+  font-size: 24px;
+}
+
+.intro.dark .note p {
+  color: var(--white);
+  font-size: 18px;
+}
+
+.intro.dark .note i {
+  color: var(--white);
+  right: 12px;
+  position: absolute;
+}
