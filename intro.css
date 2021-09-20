@@ -9,8 +9,10 @@ main {
 /* ---------------------------- tag main prop ---------------------------- */
 .intro {
   margin-top: 60px;
-  height: 300px;
+  height: auto;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   position: relative;
 }
 
@@ -32,45 +34,49 @@ main {
   color: var(--black);
 }
 
-.intro .btn {
+.intro .btn.btn-explore{
   margin-top: 24px;
-  height: 48px;
   width: 200px;
+  height: 48px;
   line-height: 48px;
+}
+/* ---------------------------- BTN ---------------------------- */
+.btn {
   text-align: center;
   border-radius: 12px;
   background-color: var(--main);
   cursor: pointer;
 }
 
-.intro .btn a {
+.btn a {
   color: var(--white);
   font-size: 24px;
   text-decoration: none;
 }
 
-.intro .btn:hover {
+.btn:hover {
   background-color: var(--main-hover);
 }
-
 /* ---------------------------- Intro note ---------------------------- */
-.intro .note{
-  width: 360px;
+.intro .note {
   height: auto;
-  margin-top: 40px;
-  position: absolute;
-  right: 0;
+  width: 360px;
 }
-
 /* ---------------------------- Dark theme props ---------------------------- */
-.intro.dark .intro-text h1 {
+.main-wrapper.dark .intro-text h1 {
   color: var(--white);
 }
 
-.intro.dark .intro-text span {
+.main-wrapper.dark .intro-text span {
   color: var(--white);
 }
 
-.intro.dark .intro-text p {
+.main-wrapper.dark .intro-text p {
   color: var(--white);
+}
+/* ---------------------------- Media ---------------------------- */
+@media (max-width: 900px) {
+  .intro .note {
+    display: none;
+  }
 }

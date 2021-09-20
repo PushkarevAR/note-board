@@ -10,17 +10,25 @@
 
 :root {
   --white: #fff;
-  --black: #292722;
-  --main: #ffd257;
-  --main-hover: #ffd257cc;
-  --btn: #e9c258;
-  --btn-hover: #e9c25880;
-  --light-bg: #fffbf1;
+  --black: #27312b;
+  --main: #6ace97;
+  --main-hover: #6ace97cc;
+  --btn: #59b884;
+  --btn-hover: #59b88480;
+  --light-bg: #e7fdf1;
 }
 
 body {
   position: relative;
   background-color: var(--light-bg);
+
+  /* Hide scroll */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 header {
@@ -32,6 +40,10 @@ header {
   background-color: var(--main);
   z-index: 2;
   box-shadow: 0 2px 12px 3px rgba(0, 0, 0, 0.1);
+}
+
+header.hide {
+  top: -72px;
 }
 
 header .header-box {

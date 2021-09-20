@@ -8,6 +8,18 @@ colorSwitcherIcon.addEventListener("click", () => {
 let btns = document.querySelectorAll(".color");
 let root = document.querySelector(":root");
 
+let darkTheme = [
+  "#181818",
+  "#222222",
+  "#222222cc",
+  "#1a1a1a",
+  "#1a1a1a80",
+  "#2e2e2e",
+];
+
+let themeSwitcherIcon = document.querySelector(".theme-switcher-icon");
+let mainWrapper = document.querySelector(".main-wrapper");
+
 for (let btn of btns) {
   btn.addEventListener("click", (e) => {
     let target = e.target;
@@ -29,25 +41,13 @@ for (let btn of btns) {
     root.style.setProperty("--light-bg", color[5]);
 
     themeSwitcherIcon.classList.remove("dark");
-    intro.classList.remove("dark");
+    mainWrapper.classList.remove("dark");
   });
 }
 
-let darkTheme = [
-  "#181818",
-  "#222222",
-  "#222222cc",
-  "#1a1a1a",
-  "#1a1a1a80",
-  "#2e2e2e",
-];
-
-let themeSwitcherIcon = document.querySelector(".theme-switcher-icon");
-let intro = document.querySelector(".intro");
-
 themeSwitcherIcon.addEventListener("click", () => {
   themeSwitcherIcon.classList.toggle("dark");
-  intro.classList.toggle("dark");
+  mainWrapper.classList.toggle("dark");
 
   if (document.querySelector(".dark")) {
     root.style.setProperty("--black", darkTheme[0]);
@@ -58,13 +58,7 @@ themeSwitcherIcon.addEventListener("click", () => {
     root.style.setProperty("--light-bg", darkTheme[5]);
   } else {
     themeSwitcherIcon.classList.remove("dark");
-    intro.classList.remove("dark");
+    mainWrapper.classList.remove("dark");
     document.querySelector(".color.purple").click();
   }
 });
-
-
-function auto_grow(element) {
-  element.style.height = "24px";
-  element.style.height = (element.scrollHeight)+"px";
-}

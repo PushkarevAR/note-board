@@ -17,7 +17,7 @@
   </head>
 
   <body>
-    <header>
+    <header class="">
       <div class="header-box">
         <div class="logo">
           <a href="#">Note Board</a>
@@ -39,11 +39,11 @@
 
                 <div class="btn-box">
                   <button
-                    class="color active blue"
+                    class="color blue"
                     data-colors="#292722 #ffd257 #ffd257cc #e9c258 #e9c25880 #fffbf1"
                   ></button>
                   <button
-                    class="color green"
+                    class="color active green"
                     data-colors="#27312b #6ace97 #6ace97cc #59b884 #59b88480 #e7fdf1"
                   ></button>
                   <button
@@ -62,7 +62,7 @@
       </div>
     </header>
 
-    <main>
+    <main class="main-wrapper">
       <section class="intro">
         <div class="intro-text">
           <h1>Wellcome to Your <span>Note Board</span></h1>
@@ -76,7 +76,7 @@
         </div>
         <div class="intro-note">
           <div class="note">
-            <i class="fas fa-times-circle"></i>
+            <i class="fas fa-times-circle fuck" id="btn-close"></i>
             <h3>Your first note</h3>
             <p>
               Write down enething You want... Lorem ipsum dolor sit amet
@@ -89,42 +89,20 @@
 
       <section class="notes-box">
         <div class="notes-wrapper">
-          <div class="note">
-            <i class="fas fa-times-circle"></i>
+          <div class="note note-input">
+            <i class="fas fa-times-circle fuck" id="btn-close"></i>
             <input type="text" name="note-title" placeholder="Title" />
-            <textarea
-              name="note-text"
-              rows="5"
-              placeholder="note"
-              oninput="auto_grow(this)"
-            ></textarea>
-            <button type="submit">Create</button>
-          </div>
-
-          <div class="note">
-            <i class="fas fa-times-circle"></i>
-            <h3>Your first note</h3>
-            <p>
-              Write down enething You want... Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Eos, enim. Corrupti, itaque fugit
-              veniam quas libero debitis sint ipsa.
-            </p>
-          </div>
-
-          <div class="note">
-            <i class="fas fa-times-circle"></i>
-            <h3>Your first note</h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam
-              consectetur laborum voluptate alias dolor earum beatae delectus
-              commodi in provident iste, cumque tenetur sapiente dicta!
-              Molestiae inventore consequuntur quasi distinctio.
-            </p>
+            <textarea name="note-text" placeholder="Note"></textarea>
+            <div class="btn btn-create">
+              <a href="#">Add note</a>
+            </div>
           </div>
         </div>
       </section>
     </main>
 
-    <script src="theme-colors.js"></script>
+    <script src="theme-colors-switcher.js"></script>
+    <script src="hide-header.js"></script>
+    <script src="create-note.js"></script>
   </body>
 </html>
