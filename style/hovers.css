@@ -1,0 +1,29 @@
+.color-switcher-dropdown button.color:hover {
+  box-shadow: inset 0 0 0 3px rgb(240, 240, 240, 1);
+}
+
+header button:hover,
+.theme-switcher-icon:hover,
+.color-switcher-icon:hover {
+  background-color: var(--btn-hover);
+  transform: scale(1.1);
+}
+
+button:hover{
+  transform: scale(1.1);
+}
+
+.note i:hover {
+  color: rgb(231, 71, 71);
+  transform: rotate(-90deg) scale(1.25);
+}
+
+.main-wrapper .notes-wrapper .note:hover {
+  transform: rotate(0.25deg) scale(1.25) translateY(2px);
+  background-color: var(--btn-hover);
+  z-index: 99;
+}
+
+.main-wrapper.dark .notes-wrapper .note:hover {
+  background-color: var(--black);
+}

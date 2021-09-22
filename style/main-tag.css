@@ -1,0 +1,77 @@
+main {
+  position: relative;
+  max-width: 1600px;
+  margin: auto;
+  padding: 72px 24px;
+  z-index: 1;
+}
+
+.intro {
+  margin-top: 20%;
+  height: auto;
+
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+}
+
+.notes-wrapper::before {
+  width: 100%;
+  height: 2px;
+  margin: 36px 0;
+
+  display: block;
+  content: "";
+  background: var(--main);
+}
+
+.intro .intro-text{
+  margin-right: 24px;
+}
+
+.intro .intro-text h1 {
+  font-size: 2rem;
+  color: var(--black);
+}
+
+.intro .intro-text span {
+  font-size: 2rem;
+  color: var(--main);
+}
+
+.intro .intro-text p {
+  font-size: 1rem;
+  color: var(--black);
+}
+
+.intro button {
+  margin: 24px 0;
+
+}
+
+/* ---------------------------- Dark theme props ---------------------------- */
+.main-wrapper.dark .intro-text h1 {
+  color: var(--white);
+}
+
+.main-wrapper.dark .intro-text span {
+  color: var(--white);
+}
+
+.main-wrapper.dark .intro-text p {
+  color: var(--white);
+}
+/* ---------------------------- Media ---------------------------- */
+@media (max-width: 1100px) {
+  .intro {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .intro .intro-text{
+    margin-right: 0;
+    text-align: center;
+  }
+}

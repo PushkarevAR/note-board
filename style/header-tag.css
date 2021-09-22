@@ -1,45 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-  transition: all 0.15s ease;
-}
-
-:root {
-  --white: #fff;
-  --black: #27312b;
-  --main: #6ace97;
-  --main-hover: #6ace97cc;
-  --btn: #59b884;
-  --btn-hover: #59b88480;
-  --light-bg: #e7fdf1;
-}
-
-body {
-  position: relative;
-  background-color: var(--light-bg);
-
-  /* Hide scroll */
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
-body::-webkit-scrollbar {
-  display: none;
-}
-
 header {
-  position: fixed;
-
   height: 72px;
   width: 100%;
 
+  position: fixed;
   background-color: var(--main);
-  z-index: 2;
   box-shadow: 0 2px 12px 3px rgba(0, 0, 0, 0.1);
+  z-index: 2;
 }
 
 header.hide {
@@ -48,8 +14,7 @@ header.hide {
 
 header .header-box {
   height: 100%;
-  max-width: 1200px;
-
+  max-width: 1600px;
   margin: auto;
   padding: 0 24px;
 
@@ -59,7 +24,7 @@ header .header-box {
 }
 
 .header-box .logo a {
-  font-size: 36px;
+  font-size: 1.5rem;
   font-weight: 600;
   color: var(--white);
   text-decoration: none;
@@ -87,14 +52,13 @@ header .header-box {
 .appearance .color-switcher-icon {
   height: 100%;
   width: 48px;
-
   margin-right: 12px;
 
   line-height: 48px;
   border-radius: 12px;
   text-align: center;
   color: var(--white);
-  font-size: 24px;
+  font-size: 1rem;
   background-color: var(--btn);
   cursor: pointer;
 }
@@ -125,7 +89,7 @@ header .header-box {
 
 .color-switcher-dropdown h3 {
   color: var(--white);
-  font-size: 18px;
+  font-size: 0.75rem;
   font-weight: 400;
 }
 
@@ -158,29 +122,16 @@ header .header-box {
 .color-switcher-dropdown button.active {
   box-shadow: inset 0 0 0 3px rgb(240, 240, 240, 1);
 }
-.color-switcher-dropdown button.color:hover {
-  box-shadow: inset 0 0 0 3px rgb(240, 240, 240, 1);
+
+header button {
+  font-size: 1rem;
+  padding: 6.5px 24px;
+  background: var(--btn);
 }
 
-.header-box-right .login-signup {
-  height: 100%;
-  width: 120px;
 
-  line-height: 48px;
-  text-align: center;
-  border-radius: 12px;
-  background-color: var(--btn);
-  cursor: pointer;
-}
-
-.header-box-right .login-signup:hover,
-.appearance .theme-switcher-icon:hover,
-.appearance .color-switcher-icon:hover {
-  background-color: var(--btn-hover);
-}
-
-.header-box-right .login-signup a {
-  color: var(--white);
-  font-size: 24px;
-  text-decoration: none;
+@media (max-width: 500px) {
+  .logo {
+    line-height: 1;
+  }
 }
