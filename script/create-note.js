@@ -1,17 +1,74 @@
-const introTextArea = document.querySelector(".intro-text"),
-  introNoteArea = document.querySelector(".note-input"),
-  noteTitleInput = introNoteArea.querySelector("input");
+const introNoteArea = document.querySelector(".note-input"),
+  noteTitleInput = introNoteArea.querySelector("input"),
+  noteTextInput = document.querySelector("textarea"),
+  btnAddNote = introNoteArea.querySelector("button"),
+  mainArea = document.querySelector(".intro"),
+  notesArea = document.querySelector(".notes-wrapper"),
+  closeNoteInput = mainArea.querySelector("i"),
+  inputLengthCounter = introNoteArea.querySelector("span");
 
-introTextArea.querySelector("button").onclick = () => {
+// Focus on InputNote section by intro btn
+document.querySelector(".intro-text").querySelector("button").onclick = () => {
   noteTitleInput.focus();
 };
 
-const notesArea = document.querySelector(".notes-wrapper"),
-  noteTextInput = document.querySelector("textarea"),
-  btnAddNote = introNoteArea.querySelector("button"),
-  mainArea = document.querySelector(".intro");
+// Clear InputNote by cross icon
+closeNoteInput.onclick = () => clearNoteInput();
 
-btnAddNote.addEventListener("click", () => {
+function clearNoteInput() {
+  noteTextInput.value = "";
+  noteTitleInput.value = "";
+
+  noteTextInput.placeholder = "Note";
+  noteTitleInput.placeholder = "Title";
+
+  noteTextInput.style.height = "120px";
+
+  inputLengthCounter.style.color = "var(--main)";
+  inputLengthCounter.style.visibility = "hidden";
+}
+//InputNote validation
+noteTextInput.onkeyup = (e) => {
+  let element = e.target;
+  validated(element);
+
+  // Resize noteTextArea
+  noteTextInput.style.height = "120px";
+  let scHeight = e.target.scrollHeight;
+  if (scHeight > 120) noteTextInput.style.height = `${scHeight}px`;
+};
+
+noteTextInput.onkeydown = (e) => {
+  let element = e.target;
+  validated(element);
+};
+
+function validated(input) {
+  const inputLimit = 100,
+    inputLength = input.value.length;
+
+  if (inputLength != 0) {
+    inputLengthCounter.style.visibility = "visible";
+    inputLengthCounter.textContent = inputLimit - inputLength;
+
+    if (inputLength <= inputLimit) {
+      btnAddNote.disabled = false;
+      inputLengthCounter.style.color = "var(--main)";
+    } else {
+      btnAddNote.disabled = true;
+      inputLengthCounter.style.color = "rgb(235, 121, 121)";
+    }
+  } else {
+    btnAddNote.disabled = false;
+    inputLengthCounter.style.color = "var(--main)";
+    inputLengthCounter.style.visibility = "hidden";
+  }
+}
+
+// Add note by btn "Add note"
+btnAddNote.onclick = () => {
+  if (isInputEmpty(noteTitleInput) || isInputEmpty(noteTextInput)) return;
+
   if (!notesArea.querySelector(".note")) {
     mainArea.style.marginTop = "60px";
     notesArea.style.visibility = "visible";
@@ -25,8 +82,25 @@ btnAddNote.addEventListener("click", () => {
     <p>${noteTextInput.value.replace(/\n\r?/g, "<br />")}</p>`;
 
   notesArea.append(note);
-});
+  clearNoteInput();
+};
 
+function isInputEmpty(input) {
+  if (input.value == "") {
+    input.style.backgroundColor = "rgb(235, 121, 121)";
+    input.style.transform = "rotate(0.5deg) scale(1.1) translateY(2px)";
+    input.placeholder = "Type something here...";
+
+    setTimeout(() => {
+      input.style.backgroundColor = "var(--white";
+      input.style.transform = "none";
+    }, 100);
+    input.focus();
+    return true;
+  } else return false;
+}
+
+// delete notes and hide notesArea if there r no notes at all
 notesArea.onclick = function (event) {
   let target = event.target;
 
@@ -43,14 +117,8 @@ notesArea.onclick = function (event) {
   }, 80);
 };
 
-function clearNoteInput() {
-  noteTextInput.value = "";
-  noteTitleInput.value = "";
-}
+// Sortable.create(notesArea, { handle: ".glyphicon-move", animation: 150 });
 
-const closeNoteInput = mainArea.querySelector("i");
-
-closeNoteInput.addEventListener("click", () => clearNoteInput());
 // Drag 'n drop
 
 // const dropArea = document.querySelector(".drag-n-drop"),

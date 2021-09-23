@@ -17,6 +17,8 @@
       src="https://kit.fontawesome.com/3617a89b26.js"
       crossorigin="anonymous"
     ></script>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.10.2/Sortable.min.js"></script> -->
   </head>
 
   <body>
@@ -64,7 +66,6 @@
 
     <main class="main-wrapper">
       <section class="intro">
-
         <div class="intro-text">
           <h1>Wellcome to Your <span>Note Board</span></h1>
           <p>
@@ -77,16 +78,16 @@
         <div class="intro-note">
           <div class="note note-input">
             <i class="fas fa-times-circle fuck" id="btn-close"></i>
-            <input type="text" name="note-title" placeholder="Title" />
-            <textarea name="note-text" placeholder="Note"></textarea>
-            <button>Add Note</button>
+            <input type="text" name="note-title" placeholder="Title" required maxlength="20"/>
+            <textarea name="note-text" placeholder="Note" required></textarea>
+            <button type="submit">Add Note</button>
+            <span class="input-length">100</span>
           </div>
         </div>
-
       </section>
 
       <section class="notes-wrapper">
-          <!-- <div class="drag-n-drop">
+        <!-- <div class="drag-n-drop">
             <h3>Drag & Drop to Upload File</h3>
             <button>Browse File</button>
             <input type="file" hidden />

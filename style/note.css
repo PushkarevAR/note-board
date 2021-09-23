@@ -83,12 +83,23 @@
   height: 120px;
 
   outline: none;
-  padding-left: 12px;
+  padding: 12px;
   font-size: 0.75rem;
   border-radius: 12px;
   border: 2px solid var(--light-bg);
 
   word-wrap: break-word;
+}
+
+.note span{
+  height: 36px;
+  padding: auto;
+  margin-right: 12px;
+  float: right;
+  font-size: 0.75rem;
+  line-height: 36px;
+  color: var(--btn);
+  visibility: hidden;
 }
 
 .note button{

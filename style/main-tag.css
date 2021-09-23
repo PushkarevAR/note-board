@@ -37,6 +37,7 @@ main {
 }
 
 .intro .intro-text span {
+  display: inline-block;
   font-size: 2rem;
   color: var(--main);
 }

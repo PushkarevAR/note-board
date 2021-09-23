@@ -15,6 +15,7 @@ button:hover{
 
 .note i:hover {
   color: rgb(231, 71, 71);
+  color: rgb(235, 121, 121);
   transform: rotate(-90deg) scale(1.25);
 }
 
