@@ -117,7 +117,9 @@ notesArea.onclick = function (event) {
   }, 80);
 };
 
-// Sortable.create(notesArea, { handle: ".glyphicon-move", animation: 150 });
+Sortable.create(notesArea, {
+  animation: 150,
+});
 
 // Drag 'n drop
 

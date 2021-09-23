@@ -33,6 +33,7 @@
   color: var(--black);
   margin-right: 48px;
   font-size: 1rem;
+  cursor: grabbing;
 }
 
 .note p {
