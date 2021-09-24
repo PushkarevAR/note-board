@@ -2,7 +2,7 @@ main {
   position: relative;
   max-width: 1600px;
   margin: auto;
-  padding: 72px 24px;
+  padding: 10px 24px;
   z-index: 1;
 }
 
@@ -24,7 +24,7 @@ main {
 
   display: block;
   content: "";
-  background: var(--main);
+  background: var(--grey);
 }
 
 .intro .intro-text{
@@ -39,7 +39,7 @@ main {
 .intro .intro-text span {
   display: inline-block;
   font-size: 2rem;
-  color: var(--main);
+  color: var(--color);
 }
 
 .intro .intro-text p {
@@ -49,20 +49,6 @@ main {
 
 .intro button {
   margin: 24px 0;
-
-}
-
-/* ---------------------------- Dark theme props ---------------------------- */
-.main-wrapper.dark .intro-text h1 {
-  color: var(--white);
-}
-
-.main-wrapper.dark .intro-text span {
-  color: var(--white);
-}
-
-.main-wrapper.dark .intro-text p {
-  color: var(--white);
 }
 /* ---------------------------- Media ---------------------------- */
 @media (max-width: 1100px) {

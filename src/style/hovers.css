@@ -1,36 +1,34 @@
 .color-switcher-dropdown button.color:hover {
-  box-shadow: inset 0 0 0 3px rgb(240, 240, 240, 1);
+  box-shadow: inset 0 0 0 3px var(--grey),
+    inset 0 0 0 6px var(--white);
 }
 
-header button:hover,
 .theme-switcher-icon:hover,
 .color-switcher-icon:hover {
-  background-color: var(--btn-hover);
-  transform: scale(1.1);
+  transform: scale(1.08);
+  color: var(--color);
+  box-shadow: 0 2px 12px 3px rgba(0, 0, 0, 0.1);
 }
 
-button:hover{
-  transform: scale(1.1);
+button:hover {
+  transform: scale(1.08);
+  background-color: var(--color-hover);
+  box-shadow: 0 2px 12px 3px rgba(0, 0, 0, 0.1);
 }
 
 .note i:hover {
-  color: rgb(231, 71, 71);
-  color: rgb(235, 121, 121);
+  color: var(--error);
   transform: rotate(-90deg) scale(1.25);
 }
 
 .main-wrapper .notes-wrapper .note:hover {
-  background-color: var(--btn-hover);
+  background-color: var(--white);
   z-index: 99;
 }
 
 .main-wrapper .notes-wrapper .note.note:nth-of-type(odd):hover {
-  transform: rotate(.5deg) scale(1.25) translateY(2px);
+  transform: rotate(0.5deg) scale(1.25) translateY(2px);
 }
 .main-wrapper .notes-wrapper .note:nth-of-type(even):hover {
-  transform: rotate(-.5deg) scale(1.25) translateY(2px);
-}
-
-.main-wrapper.dark .notes-wrapper .note:hover {
-  background-color: var(--black);
+  transform: rotate(-0.5deg) scale(1.25) translateY(2px);
 }

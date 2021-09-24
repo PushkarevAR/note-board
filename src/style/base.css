@@ -12,17 +12,19 @@
 
 :root {
   --white: #fff;
-  --black: #27312b;
-  --main: #6ace97;
-  --main-hover: #6ace97cc;
-  --btn: #59b884;
-  --btn-hover: #59b88480;
-  --light-bg: #e7fdf1;
+  --black: #252525;
+  --main: #f7f7f7;
+  --grey: rgb(235, 235, 235);
+  
+  --error: rgb(223, 70, 70);
+
+  --color: rgb(61, 133, 201);
+  --color-hover: rgb(57, 122, 182);
 }
 
 body {
   position: relative;
-  background-color: var(--light-bg);
+  background-color: var(--main);
 
   /* Hide scroll */
   -ms-overflow-style: none; /* IE and Edge */
@@ -39,7 +41,7 @@ button {
   font-weight: 400;
   border: none;
   outline: none;
-  background: var(--main);
+  background: var(--color);
   color: var(--white);
   border-radius: 12px;
   cursor: pointer;

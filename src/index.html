@@ -6,12 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Note Board</title>
 
-    <link rel="stylesheet" href="/src/style/drag-n-drop.css" />
-    <link rel="stylesheet" href="/src/style/header-tag.css" />
+    <link rel="stylesheet" href="/src/style/header.css" />
     <link rel="stylesheet" href="/src/style/hovers.css" />
-    <link rel="stylesheet" href="/src/style/main-tag.css" />
+    <link rel="stylesheet" href="/src/style/main.css" />
     <link rel="stylesheet" href="/src/style/note.css" />
-    <link rel="stylesheet" href="/src/style/basics.css" />
+    <link rel="stylesheet" href="/src/style/base.css" />
 
     <script
       src="https://kit.fontawesome.com/3617a89b26.js"
@@ -25,7 +24,7 @@
     <header class="">
       <div class="header-box">
         <div class="logo">
-          <a href="#">Note Board</a>
+          <a href="#"></a>
         </div>
 
         <div class="header-box-right">
@@ -44,16 +43,16 @@
 
                 <div class="btn-box">
                   <button
-                    class="color blue"
-                    data-colors="#292722 #ffd257 #ffd257cc #e9c258 #e9c25880 #fffbf1"
+                    class="color active blue"
+                    data-colors="rgb(61,133,201) rgb(57,122,182)"
                   ></button>
                   <button
-                    class="color active green"
-                    data-colors="#27312b #6ace97 #6ace97cc #59b884 #59b88480 #e7fdf1"
+                    class="color green"
+                    data-colors="rgb(32,158,70) rgb(30,136,62)"
                   ></button>
                   <button
                     class="color purple"
-                    data-colors="#231f25 #ac40f4 #ac40f4cc #8515cf #8515cf80 #fcf8ff"
+                    data-colors="rgb(201,61,119) rgb(177,55,106)"
                   ></button>
                 </div>
               </div>
@@ -95,8 +94,7 @@
       </section>
     </main>
 
-    <script src="/src/script/create-note.js"></script>
-    <script src="/src/script/hide-header.js"></script>
-    <script src="/src/script/theme-colors-switcher.js"></script>
+    <script src="/src/script/app.js"></script>
+    <script src="/src/script/appearance.js"></script>
   </body>
 </html>
