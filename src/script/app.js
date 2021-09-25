@@ -119,3 +119,5 @@ notesArea.addEventListener("click", function (event) {
 Sortable.create(notesArea, { //making notes draggble xD
   animation: 150,
 });
+
+export { isInputEmpty };

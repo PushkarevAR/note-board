@@ -7,11 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Note Board</title>
 
-  <link rel="stylesheet" href="/src/style/header.css" />
-  <link rel="stylesheet" href="/src/style/hovers.css" />
-  <link rel="stylesheet" href="/src/style/main.css" />
-  <link rel="stylesheet" href="/src/style/note.css" />
-  <link rel="stylesheet" href="/src/style/base.css" />
+  <link rel="stylesheet" href="../src/style/header.css" />
+  <link rel="stylesheet" href="../src/style/hovers.css" />
+  <link rel="stylesheet" href="../src/style/main.css" />
+  <link rel="stylesheet" href="../src/style/note.css" />
+  <link rel="stylesheet" href="../src/style/base.css" />
+  <link rel="stylesheet" href="../src/style/authentication.css">
 
   <script src="https://kit.fontawesome.com/3617a89b26.js" crossorigin="anonymous"></script>
 
@@ -79,21 +80,23 @@
     </section>
   </main>
 
-  <div class="modal off">
+  <div class="modal">
     <div class="auth">
       <i class="fas fa-times-circle fuck" id="btn-close"></i>
-      <h3>It's nice to see <span>You</span> back</h3>
+      <h3 class="reg">It's nice to see <span>You</span> back</h3>
       <p>And you are?</p>
       <input type="email" id="auth-login" placeholder="your beautiful email . . ." />
+      <p>and</p>
       <input type="password" id="auth-pass" placeholder="your safest password . . ." />
       <button>Login</button>
       <p>Not registered yet? <a href="#">Join us now!</a></p>
+      <p>You better do not forget your password, because there are no reset function for it. x0x0</p>
     </div>
   </div>
 
-  <script src="/src/script/app.js"></script>
-  <script src="/src/script/appearance.js"></script>
-  <script src="/src/script/login.js"></script>
+  <script type="module" src="../src/script/app.js"></script>
+  <script type="module" src="../src/script/appearance.js"></script>
+  <script type="module" src="../src/script/authentication.js"></script>
 </body>
 
 </html>

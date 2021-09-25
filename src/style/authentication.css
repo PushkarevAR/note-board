@@ -1,0 +1,97 @@
+.modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    backdrop-filter: blur(3px);
+  
+    opacity: 0;
+    z-index: -9999;
+  }
+  
+  .modal.modal-active {
+    opacity: 1;
+    z-index: 9999;
+  }
+  
+  .modal .auth {
+    padding: 24px 24px 12px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: var(--main);
+    border-radius: 12px;
+    box-shadow: 0 2px 12px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal input {
+    padding: 12px;
+    width: 100%;
+  
+    font-size: 0.75rem;
+    border-radius: 12px;
+    outline: none;
+    border: none;
+    color: var(--black);
+    background-color: var(--white);
+  }
+
+  .modal input:first-of-type{
+    margin-top: 12px;
+  }
+  
+  .modal h3 {
+    color: var(--black);
+    margin-top: 12px;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  
+  .modal span{
+    color: var(--color);
+  }
+  
+  .modal p{
+    color: var(--black);
+    font-size: .5rem;
+  }
+
+  .modal p.incorrect{
+    color: var(--error);
+  }
+
+.modal p:nth-of-type(2){
+  margin: 12px 0;
+}
+
+  .modal p:last-of-type{
+      position: absolute;
+      bottom: -60px;
+      display: block;
+      text-align: center;
+      width: 400px;
+        color: var(--black);
+    }
+  
+  .modal a{
+    text-decoration: none;
+    color: var(--color);
+    font-size: .5rem;
+  }
+  
+  .modal button{
+    margin: 24px 0 12px 0;
+  }
+  
+  .modal i{
+    position: absolute;
+    top: -36px;
+    color: var(--black);
+    cursor: pointer;
+  }
