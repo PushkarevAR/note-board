@@ -47,8 +47,15 @@ main {
   color: var(--black);
 }
 
+.intro .intro-text p.notification {
+  margin: 0 0 12px 12px;
+  display: inline-block;
+  font-size: .75rem;
+  color: var(--black);
+}
+
 .intro button {
-  margin: 24px 0;
+  margin: 24px 12px 24px 0;
 }
 /* ---------------------------- Media ---------------------------- */
 @media (max-width: 1100px) {

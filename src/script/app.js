@@ -8,23 +8,15 @@ const introArea = document.querySelector(".intro"),
   notesArea = document.querySelector(".notes-wrapper");
 
 // Focus on Mote input section by intro btn
-document.querySelector(".intro-text").querySelector("button").onclick = () => {
+document
+  .querySelector(".intro-text")
+  .querySelector(".btn-create-note").onclick = () => {
   noteTitleInput.focus();
 };
 
 // Clear Note input by cross icon
 closeNoteInput.addEventListener("click", clearNoteInput);
 
-function clearNoteInput() {
-  // function clears .note-input
-  noteTextInput.value = "";
-  noteTitleInput.value = "";
-  noteTextInput.placeholder = "Note";
-  noteTitleInput.placeholder = "Title";
-  noteTextInput.style.height = "120px";
-  inputLengthCounter.style.color = "var(--color)";
-  inputLengthCounter.style.visibility = "hidden";
-}
 // Note input validation
 noteTextInput.addEventListener("keyup", (e) => {
   validated(e.target);
@@ -36,7 +28,52 @@ noteTextInput.addEventListener("keyup", (e) => {
 
 noteTextInput.addEventListener("keydown", (e) => validated(e.target));
 
+// Add note by btn "Add note"
+btnAddNote.addEventListener("click", () => {
+  if (isInputEmpty(noteTitleInput) || isInputEmpty(noteTextInput)) return;
+
+  if (!notesArea.querySelector(".note")) {
+    // move intro on top
+    introArea.style.marginTop = "100px";
+    notesArea.style.visibility = "visible";
+  }
+
+  renderNotes();
+  clearNoteInput();
+});
+
+// delete notes and hide notesArea if there r no notes at all
+notesArea.addEventListener("click", function (event) {
+  let target = event.target;
+
+  if (target.tagName != "I") return; // out if click not on close btn
+
+  target.parentNode.style.opacity = 0.5; // just to make it smoothe
+
+  setTimeout(() => {
+    target.parentNode.remove();
+    // if there r no notes at all -> move intro
+    if (!notesArea.querySelector(".note")) moveIntroSection();
+  }, 80);
+});
+
+Sortable.create(notesArea, {
+  //making notes draggble xD
+  animation: 150,
+});
+
+const btnClearBoard = introArea.querySelector(".btn-clear-board");
+
+btnClearBoard.addEventListener("click", clearNoteBoard);
+
+function moveIntroSection() {
+  //function moves intro section
+  introArea.style.marginTop = "20%";
+  notesArea.style.visibility = "hidden";
+}
+
 function validated(input) {
+  //function validate input length
   const inputLimit = 100,
     inputLength = input.value.length;
 
@@ -58,21 +95,8 @@ function validated(input) {
   }
 }
 
-// Add note by btn "Add note"
-btnAddNote.addEventListener("click", () => {
-  if (isInputEmpty(noteTitleInput) || isInputEmpty(noteTextInput)) return;
-
-  if (!notesArea.querySelector(".note")) {
-    // move intro on top
-    introArea.style.marginTop = "100px";
-    notesArea.style.visibility = "visible";
-  }
-
-  renderNotes();
-  clearNoteInput();
-});
-
 function renderNotes() {
+  //function create note element and append it
   let note = document.createElement("div");
 
   note.classList.add("note");
@@ -84,6 +108,7 @@ function renderNotes() {
 }
 
 function isInputEmpty(input) {
+  //function flash empty input with red color
   if (input.value == "") {
     input.style.backgroundColor = "var(--error)";
     input.style.transform = "rotate(0.5deg) scale(1.1) translateY(2px)";
@@ -98,26 +123,30 @@ function isInputEmpty(input) {
   } else return false;
 }
 
-// delete notes and hide notesArea if there r no notes at all
-notesArea.addEventListener("click", function (event) {
-  let target = event.target;
+function clearNoteInput() {
+  // function clears .note-input
+  noteTextInput.value = "";
+  noteTitleInput.value = "";
+  noteTextInput.placeholder = "Note";
+  noteTitleInput.placeholder = "Title";
+  noteTextInput.style.height = "120px";
+  inputLengthCounter.style.color = "var(--color)";
+  inputLengthCounter.style.visibility = "hidden";
+}
 
-  if (target.tagName != "I") return; // out if click not on close btn
+function clearNoteBoard() {
+  //fuction clear section notes-wrapper
+  if (notesArea.querySelector(".note")) {
+    notesArea.innerHTML = "";
+    moveIntroSection();
+  } else {
+    let notification = document.createElement("p");
+    notification.textContent = "There are no notes on the board!";
+    notification.classList.add("notification");
+    btnClearBoard.after(notification);
 
-  target.parentNode.style.opacity = 0.5; // just to make it smoothe
-  
-  setTimeout(() => {
-    target.parentNode.remove();
-
-    if (!notesArea.querySelector(".note")) { // if there r no notes at all -> move intro
-      introArea.style.marginTop = "20%";
-      notesArea.style.visibility = "hidden";
-    }
-  }, 80);
-});
-
-Sortable.create(notesArea, { //making notes draggble xD
-  animation: 150,
-});
+    setTimeout(() => notification.remove(), 1000);
+  }
+}
 
 export { isInputEmpty };
