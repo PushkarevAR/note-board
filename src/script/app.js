@@ -1,3 +1,5 @@
+import Sortable from '/node_modules/sortablejs/modular/sortable.core.esm.js';
+
 const introArea = document.querySelector(".intro"),
   introNoteArea = introArea.querySelector(".note-input"),
   noteTitleInput = introNoteArea.querySelector("input"),

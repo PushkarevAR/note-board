@@ -1,0 +1,32 @@
+{
+  "name": "note-board",
+  "version": "1.0.0",
+  "description": "interactive note board",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PushkarevAR/note-board.git"
+  },
+  "keywords": [
+    "note",
+    "notes",
+    "none",
+    "board",
+    "js",
+    "css",
+    "html",
+    "sortable"
+  ],
+  "author": "PushkarevAR <pm.pushkarev.ar@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PushkarevAR/note-board/issues"
+  },
+  "homepage": "https://github.com/PushkarevAR/note-board#readme",
+  "dependencies": {
+    "sortablejs": "^1.14.0"
+  }
+}
