@@ -1,4 +1,17 @@
-import Sortable from '/node_modules/sortablejs/modular/sortable.core.esm.js';
+import '../style/authentication.css';
+import '../style/base.css';
+import '../style/header.css';
+import '../style/hovers.css';
+import '../style/main.css';
+import '../style/note.css';
+
+import './appearance';
+import './authentication'
+
+// IDK WHY "~" SHIT DOESNT WORKS pm me cuz im dumb
+// icant do normal core import from sortable 0_o
+// import Sortable from '../../node_modules/sortablejs/modular/sortable.core.esm.js';
+import Sortable from 'sortablejs';
 
 const introArea = document.querySelector(".intro"),
   introNoteArea = introArea.querySelector(".note-input"),
