@@ -41,6 +41,7 @@
           </div>
         </div>
         <button class="btn-login">Login</button>
+        <button class="btn-login-out">Logout</button>
       </div>
     </div>
   </header>
@@ -74,17 +75,39 @@
   </main>
 
   <div class="modal">
-    <div class="auth">
-      <i class="fas fa-times-circle fuck" id="btn-close"></i>
-      <h3 class="reg">It's nice to see <span>You</span> back</h3>
-      <p>And you are?</p>
-      <input type="email" id="auth-login" placeholder="your beautiful email . . ." />
-      <p>and</p>
-      <input type="password" id="auth-pass" placeholder="your safest password . . ." />
-      <button class="btn-login-reg">Login</button>
-      <p>Not registered yet? <a href="#">Join us now!</a></p>
-      <p>You better do not forget your password, because there are no reset function for it. x0x0</p>
+
+    <div class="modal-container">
+
+      <div class="modal-window login-window active">
+        <i class="fas fa-times-circle" id="btn-close-modal"></i>
+        <h3 class="login-intro">It's nice to see <span>You</span> back</h3>
+        <p>And you are?</p>
+        <form class="login-form">
+          <input type="email" id="login-mail" placeholder="your beautiful email . . .">
+          <p class="form-splitter">and</p>
+          <input type="password" id="login-pass" placeholder="your safest password . . ." />
+          <button class="btn-login" type="submit">Login</button>
+        </form>
+        <p class="login-footer">Not registered yet? <a href="#">Join us now!</a></p>
+      </div>
+
+      <div class="modal-window signup-window">
+        <i class="fas fa-times-circle" id="btn-close-modal"></i>
+        <h3 class="signup-intro">One step to <span>Go</span></h3>
+        <p>Introduce yourself</p>
+        <form class="signup-form">
+          <input type="email" id="signup-mail" placeholder="your beautiful email . . .">
+          <p class="form-splitter">and</p>
+          <input type="password" id="signup-pass" placeholder="your safest password . . ." />
+          <button class="btn-signup" type="submit">Sign Up</button>
+        </form>
+        <p class="signup-footer">You are already registered? <a href="#">Logging in!</a></p>
+      </div>
+
     </div>
+
+    <p class="modal-footer">You better do not forget your password, because there are no reset function for it. x0x0</p>
+
   </div>
 
 </body>
