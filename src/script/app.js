@@ -1,15 +1,17 @@
-import "../style/authentication.css";
-import "../style/base.css";
-import "../style/header.css";
-import "../style/hovers.css";
-import "../style/main.css";
-import "../style/note.css";
+import '../style/authentication.css';
+import '../style/base.css';
+import '../style/header.css';
+import '../style/hovers.css';
+import '../style/main.css';
+import '../style/note.css';
 
-import "./appearance";
-import "./authentication";
+import './appearance';
+import './authentication'
 
-import { Note } from "./notes";
-import Sortable from "sortablejs";
+// IDK WHY "~" SHIT DOESNT WORKS pm me cuz im dumb
+// icant do normal core import from sortable 0_o
+// import Sortable from '../../node_modules/sortablejs/modular/sortable.core.esm.js';
+import Sortable from 'sortablejs';
 
 const introArea = document.querySelector(".intro"),
   introNoteArea = introArea.querySelector(".note-input"),
@@ -26,9 +28,6 @@ document
   .querySelector(".btn-create-note").onclick = () => {
   noteTitleInput.focus();
 };
-
-// Load notes from Local Storage
-// window.addEventListener("load", Note.renderNotes);
 
 // Clear Note input by cross icon
 closeNoteInput.addEventListener("click", clearNoteInput);
@@ -54,7 +53,8 @@ btnAddNote.addEventListener("click", () => {
     notesArea.style.visibility = "visible";
   }
 
-  renderNotesServer();
+  renderNotes();
+  clearNoteInput();
 });
 
 // delete notes and hide notesArea if there r no notes at all
@@ -110,16 +110,16 @@ function validated(input) {
   }
 }
 
-function renderNotesServer() {
-  const note = {
-    title: noteTitleInput.value,
-    text: noteTextInput.value,
-  };
+function renderNotes() {
+  //function create note element and append it
+  let note = document.createElement("div");
 
-  Note.create(note).then(() => {
-    clearNoteInput();
-  });
-  //Asinc request to server to save note
+  note.classList.add("note");
+  note.innerHTML = `<i class="fas fa-times-circle"></i>
+    <h3>${noteTitleInput.value}</h3>
+    <p>${noteTextInput.value.replace(/\n\r?/g, "<br />")}</p>`;
+
+  notesArea.append(note);
 }
 
 function isInputEmpty(input) {
