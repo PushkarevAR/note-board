@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/PushkarevAR/note-board#readme",
   "dependencies": {
+    "firebase": "^9.1.1",
     "sortablejs": "^1.14.0"
   },
   "devDependencies": {

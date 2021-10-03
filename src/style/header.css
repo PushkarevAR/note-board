@@ -122,9 +122,14 @@ header .header-box {
     inset 0 0 0 6px var(--white);
 }
 
-header button {
+header button.btn-auth {
   font-size: .75rem;
   padding: 4.5px 24px;
+  display: none;
+}
+
+header button.btn-auth.active {
+  display: block;
 }
 
 @media (max-width: 500px) {

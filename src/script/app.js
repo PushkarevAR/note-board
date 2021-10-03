@@ -1,38 +1,31 @@
-import '../style/authentication.css';
-import '../style/base.css';
-import '../style/header.css';
-import '../style/hovers.css';
-import '../style/main.css';
-import '../style/note.css';
+import "../style/authentication.css";
+import "../style/base.css";
+import "../style/header.css";
+import "../style/hovers.css";
+import "../style/main.css";
+import "../style/note.css";
 
-import './appearance';
-import './authentication'
+import "./appearance";
+import "./authentication";
+import "./firebase-iteraction";
 
-// IDK WHY "~" SHIT DOESNT WORKS pm me cuz im dumb
-// icant do normal core import from sortable 0_o
-// import Sortable from '../../node_modules/sortablejs/modular/sortable.core.esm.js';
-import Sortable from 'sortablejs';
+import Sortable from "sortablejs";
 
-const introArea = document.querySelector(".intro"),
-  introNoteArea = introArea.querySelector(".note-input"),
-  noteTitleInput = introNoteArea.querySelector("input"),
-  noteTextInput = introNoteArea.querySelector("textarea"),
-  btnAddNote = introNoteArea.querySelector("button"),
-  closeNoteInput = introNoteArea.querySelector("i"),
-  inputLengthCounter = introNoteArea.querySelector("span"),
-  notesArea = document.querySelector(".notes-wrapper");
+import { clearNoteBoard, clearNoteInput } from "./additional";
 
-// Focus on Mote input section by intro btn
+// Focus on note input section by intro btn
 document
   .querySelector(".intro-text")
   .querySelector(".btn-create-note").onclick = () => {
-  noteTitleInput.focus();
+  document.querySelector("#note-title").focus();
 };
 
-// Clear Note input by cross icon
+// Clear Note input by btn
+const closeNoteInput = document.querySelector("#btn-close-input");
 closeNoteInput.addEventListener("click", clearNoteInput);
 
-// Note input validation
+// Nine input length validation
+const noteTextInput = document.querySelector("#note-text");
 noteTextInput.addEventListener("keyup", (e) => {
   validated(e.target);
 
@@ -40,24 +33,10 @@ noteTextInput.addEventListener("keyup", (e) => {
   let scHeight = e.target.scrollHeight;
   if (scHeight > 120) noteTextInput.style.height = `${scHeight}px`;
 });
-
 noteTextInput.addEventListener("keydown", (e) => validated(e.target));
 
-// Add note by btn "Add note"
-btnAddNote.addEventListener("click", () => {
-  if (isInputEmpty(noteTitleInput) || isInputEmpty(noteTextInput)) return;
-
-  if (!notesArea.querySelector(".note")) {
-    // move intro on top
-    introArea.style.marginTop = "100px";
-    notesArea.style.visibility = "visible";
-  }
-
-  renderNotes();
-  clearNoteInput();
-});
-
-// delete notes and hide notesArea if there r no notes at all
+// Delete notes by btn
+const notesArea = document.querySelector(".notes-wrapper");
 notesArea.addEventListener("click", function (event) {
   let target = event.target;
 
@@ -72,96 +51,37 @@ notesArea.addEventListener("click", function (event) {
   }, 80);
 });
 
-Sortable.create(notesArea, {
-  //making notes draggble xD
-  animation: 150,
-});
-
-const btnClearBoard = introArea.querySelector(".btn-clear-board");
-
+// Delete all notes by btn
+const btnClearBoard = document.querySelector(".btn-clear-board");
 btnClearBoard.addEventListener("click", clearNoteBoard);
 
 function moveIntroSection() {
-  //function moves intro section
-  introArea.style.marginTop = "20%";
-  notesArea.style.visibility = "hidden";
+  document.querySelector(".intro").style.marginTop = "20%";
+  document.querySelector(".notes-wrapper").style.visibility = "hidden";
 }
 
 function validated(input) {
-  //function validate input length
-  const inputLimit = 100,
-    inputLength = input.value.length;
+  const Counter = document.querySelector(".input-length");
+  const btn = document.querySelector(".btn-add-note");
+  const inputLimit = 100;
+  const inputLength = input.value.length;
 
   if (inputLength != 0) {
-    inputLengthCounter.style.visibility = "visible";
-    inputLengthCounter.textContent = inputLimit - inputLength;
+    Counter.style.visibility = "visible";
+    Counter.textContent = inputLimit - inputLength;
 
     if (inputLength <= inputLimit) {
-      btnAddNote.disabled = false;
-      inputLengthCounter.style.color = "var(--color)";
+      btn.disabled = false;
+      Counter.style.color = "var(--color)";
     } else {
-      btnAddNote.disabled = true;
-      inputLengthCounter.style.color = "var(--error)";
+      btn.disabled = true;
+      Counter.style.color = "var(--error)";
     }
   } else {
-    btnAddNote.disabled = false;
-    inputLengthCounter.style.color = "var(--color)";
-    inputLengthCounter.style.visibility = "hidden";
+    btn.disabled = false;
+    Counter.style.color = "var(--color)";
+    Counter.style.visibility = "hidden";
   }
 }
 
-function renderNotes() {
-  //function create note element and append it
-  let note = document.createElement("div");
-
-  note.classList.add("note");
-  note.innerHTML = `<i class="fas fa-times-circle"></i>
-    <h3>${noteTitleInput.value}</h3>
-    <p>${noteTextInput.value.replace(/\n\r?/g, "<br />")}</p>`;
-
-  notesArea.append(note);
-}
-
-function isInputEmpty(input) {
-  //function flash empty input with red color
-  if (input.value == "") {
-    input.style.backgroundColor = "var(--error)";
-    input.style.transform = "rotate(0.5deg) scale(1.1) translateY(2px)";
-    input.placeholder = "Type something here...";
-
-    setTimeout(() => {
-      input.style.backgroundColor = "var(--white)";
-      input.style.transform = "none";
-    }, 100);
-    input.focus();
-    return true;
-  } else return false;
-}
-
-function clearNoteInput() {
-  // function clears .note-input
-  noteTextInput.value = "";
-  noteTitleInput.value = "";
-  noteTextInput.placeholder = "Note";
-  noteTitleInput.placeholder = "Title";
-  noteTextInput.style.height = "120px";
-  inputLengthCounter.style.color = "var(--color)";
-  inputLengthCounter.style.visibility = "hidden";
-}
-
-function clearNoteBoard() {
-  //fuction clear section notes-wrapper
-  if (notesArea.querySelector(".note")) {
-    notesArea.innerHTML = "";
-    moveIntroSection();
-  } else {
-    let notification = document.createElement("p");
-    notification.textContent = "There are no notes on the board!";
-    notification.classList.add("notification");
-    btnClearBoard.after(notification);
-
-    setTimeout(() => notification.remove(), 1000);
-  }
-}
-
-export { isInputEmpty };
+Sortable.create(notesArea, { animation: 150 });

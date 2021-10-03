@@ -8,6 +8,7 @@
   height: 100%;
   width: 100%;
   top: 0;
+  background-color: rgba(27, 27, 27, 0.171);
   backdrop-filter: blur(3px);
 
   opacity: 0;

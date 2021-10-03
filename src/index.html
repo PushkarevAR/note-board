@@ -33,15 +33,15 @@
               <h3>Choose your color</h3>
 
               <div class="btn-box">
-                <button class="color active blue" data-colors="rgb(61,133,201) rgb(57,122,182)"></button>
+                <button class="color blue active" data-colors="rgb(61,133,201) rgb(57,122,182)"></button>
                 <button class="color green" data-colors="rgb(32,158,70) rgb(30,136,62)"></button>
                 <button class="color purple" data-colors="rgb(201,61,119) rgb(177,55,106)"></button>
               </div>
             </div>
           </div>
         </div>
-        <button class="btn-login">Login</button>
-        <button class="btn-login-out">Logout</button>
+        <button class="btn-auth btn-login active">Login</button>
+        <button class="btn-auth btn-login-out">Logout</button>
       </div>
     </div>
   </header>
@@ -56,14 +56,15 @@
         </p>
         <button class="btn-create-note">Create Note</button>
         <button class="btn-clear-board">Clear Board</button>
+        <p class="account-info">Logined with <span class="account-info-email">pushkarev.ar@gmail.com</span></p>
       </div>
 
       <div class="intro-note">
         <div class="note note-input">
-          <i class="fas fa-times-circle fuck" id="btn-close"></i>
-          <input type="text" name="note-title" placeholder="Title" required maxlength="20" />
-          <textarea name="note-text" placeholder="Note" required></textarea>
-          <button type="submit">Add Note</button>
+          <i class="fas fa-times-circle fuck" id="btn-close-input"></i>
+          <input type="text" name="note-title" placeholder="Title" required maxlength="20" id="note-title" />
+          <textarea name="note-text" placeholder="Note" required id="note-text"></textarea>
+          <button class="btn-add-note" type="submit">Add Note</button>
           <span class="input-length">100</span>
         </div>
       </div>
@@ -83,7 +84,7 @@
         <h3 class="login-intro">It's nice to see <span>You</span> back</h3>
         <p>And you are?</p>
         <form class="login-form">
-          <input type="email" id="login-mail" placeholder="your beautiful email . . .">
+          <input type="email" id="login-email" placeholder="your beautiful email . . .">
           <p class="form-splitter">and</p>
           <input type="password" id="login-pass" placeholder="your safest password . . ." />
           <button class="btn-login" type="submit">Login</button>
@@ -96,7 +97,7 @@
         <h3 class="signup-intro">One step to <span>Go</span></h3>
         <p>Introduce yourself</p>
         <form class="signup-form">
-          <input type="email" id="signup-mail" placeholder="your beautiful email . . .">
+          <input type="email" id="signup-email" placeholder="your beautiful email . . .">
           <p class="form-splitter">and</p>
           <input type="password" id="signup-pass" placeholder="your safest password . . ." />
           <button class="btn-signup" type="submit">Sign Up</button>

@@ -42,7 +42,8 @@ button {
   border: none;
   outline: none;
   background: var(--color);
-  color: var(--white);
+  color: #fff;
+  /* color: var(--white); */
   border-radius: 12px;
   cursor: pointer;
 }
