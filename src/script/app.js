@@ -11,7 +11,12 @@ import "./firebase-iteraction";
 
 import Sortable from "sortablejs";
 
-import { clearNoteBoard, clearNoteInput } from "./additional";
+import {
+  clearNoteBoard,
+  clearNoteInput,
+  moveIntroSection,
+  validated,
+} from "./additional";
 
 // Focus on note input section by intro btn
 document
@@ -24,7 +29,7 @@ document
 const closeNoteInput = document.querySelector("#btn-close-input");
 closeNoteInput.addEventListener("click", clearNoteInput);
 
-// Nine input length validation
+// Note input length validation
 const noteTextInput = document.querySelector("#note-text");
 noteTextInput.addEventListener("keyup", (e) => {
   validated(e.target);
@@ -47,41 +52,14 @@ notesArea.addEventListener("click", function (event) {
   setTimeout(() => {
     target.parentNode.remove();
     // if there r no notes at all -> move intro
-    if (!notesArea.querySelector(".note")) moveIntroSection();
+    if (!document.querySelector(".notes-wrapper").querySelector(".note")) {
+      moveIntroSection("down");
+    }
   }, 80);
 });
 
 // Delete all notes by btn
 const btnClearBoard = document.querySelector(".btn-clear-board");
 btnClearBoard.addEventListener("click", clearNoteBoard);
-
-function moveIntroSection() {
-  document.querySelector(".intro").style.marginTop = "20%";
-  document.querySelector(".notes-wrapper").style.visibility = "hidden";
-}
-
-function validated(input) {
-  const Counter = document.querySelector(".input-length");
-  const btn = document.querySelector(".btn-add-note");
-  const inputLimit = 100;
-  const inputLength = input.value.length;
-
-  if (inputLength != 0) {
-    Counter.style.visibility = "visible";
-    Counter.textContent = inputLimit - inputLength;
-
-    if (inputLength <= inputLimit) {
-      btn.disabled = false;
-      Counter.style.color = "var(--color)";
-    } else {
-      btn.disabled = true;
-      Counter.style.color = "var(--error)";
-    }
-  } else {
-    btn.disabled = false;
-    Counter.style.color = "var(--color)";
-    Counter.style.visibility = "hidden";
-  }
-}
 
 Sortable.create(notesArea, { animation: 150 });

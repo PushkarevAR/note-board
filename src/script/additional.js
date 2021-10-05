@@ -34,7 +34,7 @@ export function clearNoteBoard() {
 
   if (notesArea.querySelector(".note")) {
     notesArea.innerHTML = "";
-    moveIntroSection();
+    moveIntroSection("down");
   } else {
     let notification = document.createElement("p");
     notification.textContent = "There are no notes on the board!";
@@ -50,4 +50,38 @@ export function smoothActivation(e, delay) {
   setTimeout(() => {
     e.classList.add("active");
   }, delay);
+}
+
+export function moveIntroSection(direction) {
+  if (direction == "down") {
+    document.querySelector(".intro").style.marginTop = "20%";
+    document.querySelector(".notes-wrapper").style.visibility = "hidden";
+  } else if (direction == "top") {
+    document.querySelector(".intro").style.marginTop = "100px";
+    document.querySelector(".notes-wrapper").style.visibility = "visible";
+  } else console.log("wrong direction parametr in moveIntroSection fn");
+}
+
+export function validated(input) {
+  const Counter = document.querySelector(".input-length");
+  const btn = document.querySelector(".btn-add-note");
+  const inputLimit = 100;
+  const inputLength = input.value.length;
+
+  if (inputLength != 0) {
+    Counter.style.visibility = "visible";
+    Counter.textContent = inputLimit - inputLength;
+
+    if (inputLength <= inputLimit) {
+      btn.disabled = false;
+      Counter.style.color = "var(--color)";
+    } else {
+      btn.disabled = true;
+      Counter.style.color = "var(--error)";
+    }
+  } else {
+    btn.disabled = false;
+    Counter.style.color = "var(--color)";
+    Counter.style.visibility = "hidden";
+  }
 }

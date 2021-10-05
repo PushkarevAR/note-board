@@ -15,8 +15,14 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
-import { hideModal,  } from "./authentication.js";
-import { isInputEmpty, clearNoteInput, smoothActivation } from "./additional.js"
+import { hideModal } from "./authentication.js";
+import {
+  isInputEmpty,
+  clearNoteInput,
+  smoothActivation,
+  moveIntroSection,
+  clearNoteBoard,
+} from "./additional.js";
 
 const firebaseApp = initializeApp({
   apiKey: "AIzaSyAdn6Xe409XU2PXWREqWY-WZ1Q53rGWH3U",
@@ -32,7 +38,7 @@ const firebaseApp = initializeApp({
 const db = getFirestore(firebaseApp);
 const auth = getAuth();
 
-// Create new user with Sign Up form
+// Signup
 const signupForm = document.querySelector(".signup-form");
 signupForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -63,6 +69,7 @@ signupForm.addEventListener("submit", (e) => {
 const logout = document.querySelector(".btn-login-out");
 logout.addEventListener("click", (e) => {
   e.preventDefault();
+  clearNoteBoard();
   signOut(auth).catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
@@ -92,91 +99,119 @@ loginForm.addEventListener("submit", (e) => {
     });
 });
 
+const btnAddNote = document.querySelector(".btn-add-note");
+btnAddNote.addEventListener("click", (e) => {
+  e.preventDefault();
+  const noteTitle = document.querySelector("#note-title"),
+    noteText = document.querySelector("#note-text");
+
+  if (isInputEmpty(noteTitle) || isInputEmpty(noteText)) return;
+
+  addDoc(collection(db, "notes"), {
+    title: noteTitle.value,
+    content: noteText.value,
+  })
+    .then(() => clearNoteInput())
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(`Error code: ${errorCode} with msg: ${errorMessage}`);
+      // move inmput to local storage
+      addNooteToLocalStorage(noteTitle.value, noteText.value);
+    });
+});
+
+function addNooteToLocalStorage(title, content) {
+  const allNotes = getAllLocalNotes();
+  const note = {
+    title,
+    content,
+  };
+  allNotes.push(note);
+  localStorage.setItem("note", JSON.stringify(allNotes));
+
+  showLocalNotes(allNotes);
+}
+
+function getAllLocalNotes() {
+  return JSON.parse(localStorage.getItem("note") || "[]");
+}
+
 // listen for auth status changes
 onAuthStateChanged(auth, (user) => {
   if (user) {
     onSnapshot(
       collection(db, "notes"),
       (snapshot) => {
-        //   setupGuides(snapshot.docs);
+        setupNotesServer(snapshot.docs);
         setupUI(user);
       },
-      (err) => console.log("on logout error masg pff" + err.message)
+      (error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(`Error code: ${errorCode} with msg: ${errorMessage}`);
+      }
     );
   } else {
     setupUI();
-    //   setupGuides([]);
-    console.log("no user here");
   }
 });
 
 const accountInfo = document.querySelector(".account-info"),
   accountInfoEmail = accountInfo.querySelector(".account-info-email");
 
-const setupUI = (user) => {
+function setupUI(user) {
   if (user) {
     //show user info
     accountInfoEmail.innerHTML = `${user.email}`;
     smoothActivation(accountInfo, 120);
-
     // toggle user UI elements
     document.querySelector(".btn-login").classList.remove("active");
     smoothActivation(document.querySelector(".btn-login-out"), 240);
   } else {
     // hide user info
     accountInfo.classList.remove("active");
-
     // toggle user elements
     document.querySelector(".btn-login-out").classList.remove("active");
     smoothActivation(document.querySelector(".btn-login"), 240);
   }
-};
+}
 
-const btnAddNote = document.querySelector(".btn-add-note"),
-  notesArea = document.querySelector(".notes-wrapper");
+const notesArea = document.querySelector(".notes-wrapper");
 
-btnAddNote.addEventListener("click", (e) => {
-  e.preventDefault();
+function setupNotesServer(data) {
+  if (data.length) {
+    let html = "";
 
-  const noteTitle = document.querySelector("#note-title"),
-    noteText = document.querySelector("#note-text"),
-    introArea = document.querySelector(".intro");
-
-  if (isInputEmpty(noteTitle) || isInputEmpty(noteText)) return;
-
-  if (!notesArea.querySelector(".note")) {
-    // move intro on top
-    introArea.style.marginTop = "100px";
-    notesArea.style.visibility = "visible";
+    moveIntroSection("top");
+    data.forEach((doc) => {
+      const note = doc.data();
+      const div = `
+      <div class="note">
+        <i class="fas fa-times-circle"></i>
+        <h3>${note.title}</h3>
+        <p>${note.content.replace(/\n\r?/g, "<br />")}</p>
+      </div>`;
+      html += div;
+    });
+    notesArea.innerHTML = html;
   }
+}
 
-  addDoc(collection(db, "notes"), {
-    title: noteTitle.value,
-    content: noteText.value,
-  })
-    .then(() => clearNoteInput());
-    // .catch((err) => console.log(err.message));
-});
+function showLocalNotes(notes) {
+  let html = "";
 
-// // DOM elements
-// const guideList = document.querySelector(".guides");
-
-// // setup guides
-// const setupGuides = (data) => {
-//   if (data.length) {
-//     let html = "";
-
-//     data.forEach((doc) => {
-//       const guide = doc.data();
-//       const li = `
-//         <li>
-//           <div class="collapsible-header grey lighten-4"> ${guide.title} </div>
-//           <div class="collapsible-body white"> ${guide.content} </div>
-//         </li>
-//       `;
-//       html += li;
-//     });
-//     guideList.innerHTML = html;
-//   } else
-//     guideList.innerHTML = '<h5 class="center-align">Login to view guides</h5>';
-// };
+  moveIntroSection("top");
+  notes.map((note) => {
+    console.log(note);
+    const div = `
+    <div class="note">
+      <i class="fas fa-times-circle"></i>
+      <h3>${note.title}</h3>
+      <p>${note.content.replace(/\n\r?/g, "<br />")}</p>
+    </div>`;
+    html += div;
+    console.log(html);
+  });
+  notesArea.innerHTML = html;
+}
