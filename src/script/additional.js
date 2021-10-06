@@ -31,7 +31,8 @@ export function clearNoteInput() {
 export function clearNoteBoard() {
   const notesArea = document.querySelector(".notes-wrapper");
   const btnClearBoard = document.querySelector(".btn-clear-board");
-
+  clearNoteInput();
+  
   if (notesArea.querySelector(".note")) {
     notesArea.innerHTML = "";
     moveIntroSection("down");

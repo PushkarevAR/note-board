@@ -40,6 +40,7 @@ const auth = getAuth();
 
 // Signup
 const signupForm = document.querySelector(".signup-form");
+const loginForm = document.querySelector(".login-form");
 signupForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -50,18 +51,18 @@ signupForm.addEventListener("submit", (e) => {
   // sign up the user
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      // Signed in
-      //   const user = userCredential.user;
-
       hideModal();
+      clearNoteBoard();
+
       signupForm.reset();
+      loginForm.reset();
       document.querySelector(".btn-login").classList.remove("active");
       smoothActivation(document.querySelector(".btn-login-out"), 240);
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      console.log(`Error code: ${errorCode} with msg: ${errorMessage}`);
+      console.log(`Create User Error code: ${errorCode} with msg: ${errorMessage}`);
     });
 });
 
@@ -70,15 +71,15 @@ const logout = document.querySelector(".btn-login-out");
 logout.addEventListener("click", (e) => {
   e.preventDefault();
   clearNoteBoard();
+
   signOut(auth).catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
-    console.log(`Error code: ${errorCode} with msg: ${errorMessage}`);
+    console.log(`LogOut Error code: ${errorCode} with msg: ${errorMessage}`);
   });
 });
 
 // login
-const loginForm = document.querySelector(".login-form");
 loginForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -90,14 +91,19 @@ loginForm.addEventListener("submit", (e) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((cred) => {
       hideModal();
+      clearNoteBoard();
+
       loginForm.reset();
+      signupForm.reset();     
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      console.log(`Error code: ${errorCode} with msg: ${errorMessage}`);
+      console.log(`Login in Error code: ${errorCode} with msg: ${errorMessage}`);
     });
 });
+
+let currentUserUid; // IMHO: looks like shit, but works
 
 const btnAddNote = document.querySelector(".btn-add-note");
 btnAddNote.addEventListener("click", (e) => {
@@ -107,7 +113,7 @@ btnAddNote.addEventListener("click", (e) => {
 
   if (isInputEmpty(noteTitle) || isInputEmpty(noteText)) return;
 
-  addDoc(collection(db, "notes"), {
+  addDoc(collection(db, "users", `${currentUserUid}`, "notes"), {
     title: noteTitle.value,
     content: noteText.value,
   })
@@ -141,10 +147,12 @@ function getAllLocalNotes() {
 onAuthStateChanged(auth, (user) => {
   if (user) {
     onSnapshot(
-      collection(db, "notes"),
+      collection(db, "users", `${user.uid}`, "notes"),
       (snapshot) => {
         setupNotesServer(snapshot.docs);
         setupUI(user);
+        currentUserUid = user.uid;
+        console.log('Auth sattus changed LOGIN');
       },
       (error) => {
         const errorCode = error.code;
@@ -154,6 +162,7 @@ onAuthStateChanged(auth, (user) => {
     );
   } else {
     setupUI();
+    console.log('Auth sattus changed LOGOUT');
   }
 });
 
@@ -193,17 +202,18 @@ function setupNotesServer(data) {
         <p>${note.content.replace(/\n\r?/g, "<br />")}</p>
       </div>`;
       html += div;
+      console.log(note);
     });
     notesArea.innerHTML = html;
   }
 }
 
 function showLocalNotes(notes) {
+  clearNoteBoard();
   let html = "";
 
   moveIntroSection("top");
   notes.map((note) => {
-    console.log(note);
     const div = `
     <div class="note">
       <i class="fas fa-times-circle"></i>
@@ -211,7 +221,6 @@ function showLocalNotes(notes) {
       <p>${note.content.replace(/\n\r?/g, "<br />")}</p>
     </div>`;
     html += div;
-    console.log(html);
   });
   notesArea.innerHTML = html;
 }
