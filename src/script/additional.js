@@ -28,24 +28,6 @@ export function clearNoteInput() {
   Counter.style.visibility = "hidden";
 }
 
-export function clearNoteBoard() {
-  const notesArea = document.querySelector(".notes-wrapper");
-  const btnClearBoard = document.querySelector(".btn-clear-board");
-  clearNoteInput();
-  
-  if (notesArea.querySelector(".note")) {
-    notesArea.innerHTML = "";
-    moveIntroSection("down");
-  } else {
-    let notification = document.createElement("p");
-    notification.textContent = "There are no notes on the board!";
-    notification.classList.add("notification");
-    btnClearBoard.after(notification);
-
-    setTimeout(() => notification.remove(), 1000);
-  }
-}
-
 export function smoothActivation(e, delay) {
   e.style.opacity = 1;
   setTimeout(() => {

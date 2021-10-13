@@ -13,10 +13,10 @@ btnCloseModal.forEach((btn) =>
 );
 
 // Switch from login window to signup window
-const loginWindow = document.querySelector(".login-window"),
-  signupWindow = document.querySelector(".signup-window"),
-  btnToSignup = loginWindow.querySelector(".login-footer"),
-  btnToLogin = signupWindow.querySelector(".signup-footer");
+const loginWindow = document.querySelector(".login-window");
+const signupWindow = document.querySelector(".signup-window");
+const btnToSignup = loginWindow.querySelector(".login-footer");
+const btnToLogin = signupWindow.querySelector(".signup-footer");
 
 btnToSignup.addEventListener("click", () => showSignupWindow(360));
 btnToLogin.addEventListener("click", () => showLoginWindow(360));

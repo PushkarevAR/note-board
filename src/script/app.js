@@ -12,11 +12,11 @@ import "./firebase-iteraction";
 import Sortable from "sortablejs";
 
 import {
-  clearNoteBoard,
   clearNoteInput,
-  moveIntroSection,
   validated,
 } from "./additional";
+
+import { clearNoteBoard } from "./firebase-iteraction";
 
 // Focus on note input section by intro btn
 document
@@ -25,6 +25,7 @@ document
   document.querySelector("#note-title").focus();
 };
 
+const notesArea = document.querySelector(".notes-wrapper");
 // Clear Note input by btn
 const closeNoteInput = document.querySelector("#btn-close-input");
 closeNoteInput.addEventListener("click", clearNoteInput);
@@ -39,24 +40,6 @@ noteTextInput.addEventListener("keyup", (e) => {
   if (scHeight > 120) noteTextInput.style.height = `${scHeight}px`;
 });
 noteTextInput.addEventListener("keydown", (e) => validated(e.target));
-
-// Delete notes by btn
-const notesArea = document.querySelector(".notes-wrapper");
-notesArea.addEventListener("click", function (event) {
-  let target = event.target;
-
-  if (target.tagName != "I") return; // out if click not on close btn
-
-  target.parentNode.style.opacity = 0.5; // just to make it smoothe
-
-  setTimeout(() => {
-    target.parentNode.remove();
-    // if there r no notes at all -> move intro
-    if (!document.querySelector(".notes-wrapper").querySelector(".note")) {
-      moveIntroSection("down");
-    }
-  }, 80);
-});
 
 // Delete all notes by btn
 const btnClearBoard = document.querySelector(".btn-clear-board");
