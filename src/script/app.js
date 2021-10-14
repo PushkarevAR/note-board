@@ -14,6 +14,7 @@ import Sortable from "sortablejs";
 import {
   clearNoteInput,
   validated,
+  colorFocus,
 } from "./additional";
 
 import { clearNoteBoard } from "./firebase-iteraction";
@@ -22,7 +23,8 @@ import { clearNoteBoard } from "./firebase-iteraction";
 document
   .querySelector(".intro-text")
   .querySelector(".btn-create-note").onclick = () => {
-  document.querySelector("#note-title").focus();
+    colorFocus(document.querySelector("#note-title"), "#6FC297");
+  // document.querySelector("#note-title").focus();
 };
 
 const notesArea = document.querySelector(".notes-wrapper");
