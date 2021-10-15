@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+
 import {
   getFirestore,
   addDoc,
@@ -7,6 +8,7 @@ import {
   onSnapshot,
   deleteDoc,
 } from "firebase/firestore";
+
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -15,15 +17,15 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
-import { hideModal } from "./authentication.js";
 import {
-  isInputEmpty,
-  clearNoteInput,
-  smoothActivation,
-  moveIntroSection,
-  actionNotification,
-  colorFocus,
-  modalNotification,
+  isInputEmpty, // -
+  moveIntroSection, // -
+  actionNotification, // -
+  modalNotification, // -
+  clearNoteInput, // +
+  smoothActivation, // +
+  colorFocus, // +
+  hideModal, // +
 } from "./additional.js";
 
 const firebaseApp = initializeApp({
@@ -40,21 +42,13 @@ const firebaseApp = initializeApp({
 const db = getFirestore(firebaseApp);
 const auth = getAuth();
 
-export let isLogined = false; // IMHO: looks like shit, but works
-export let currentUserUid;
+let isLogined = false; // IMHO: looks like shit, but works
+let currentUserUid;
 
-const notesArea = document.querySelector(".notes-wrapper");
-const signupForm = document.querySelector(".signup-form");
-const loginForm = document.querySelector(".login-form");
-
-window.onload = () => {
-  if (JSON.parse(localStorage.getItem("note") || "[]").slice().length > 0) {
-    showLocalNotes(getAllLocalNotes());
-  }
-};
-// Signup
-signupForm.addEventListener("submit", signIn);
 export function signIn(e) {
+  const signupForm = document.querySelector(".signup-form");
+  const loginForm = document.querySelector(".login-form");
+
   e.preventDefault();
   if (
     isInputEmpty(signupForm["signup-email"]) ||
@@ -88,9 +82,10 @@ export function signIn(e) {
     });
 }
 
-// login
-loginForm.addEventListener("submit", loginIn);
 export function loginIn(e) {
+  const signupForm = document.querySelector(".signup-form");
+  const loginForm = document.querySelector(".login-form");
+
   e.preventDefault();
   if (
     isInputEmpty(loginForm["login-email"]) ||
@@ -125,11 +120,9 @@ export function loginIn(e) {
     });
 }
 
-// logout
-const logout = document.querySelector(".btn-login-out");
-logout.addEventListener("click", logoutXXX);
+export function logout(e) {
+  const notesArea = document.querySelector(".notes-wrapper");
 
-export function logoutXXX(e) {
   e.preventDefault();
   signOut(auth)
     .then(() => {
@@ -142,9 +135,6 @@ export function logoutXXX(e) {
       console.log(`LogOut Error code: ${errorCode} with msg: ${errorMessage}`);
     });
 }
-
-const btnAddNote = document.querySelector(".btn-add-note");
-btnAddNote.addEventListener("click", addNote);
 
 export function addNote(e) {
   e.preventDefault();
@@ -166,9 +156,9 @@ export function addNote(e) {
         console.log(`Error code: ${errorCode} with msg: ${errorMessage}`);
       });
   } else {
-    if (JSON.parse(localStorage.getItem("note") || "[]").slice().length < 5) {
-      const LocalNoteId = Date.now();
-      addNooteToLocalStorage(LocalNoteId, noteTitle.value, noteText.value);
+    if (JSON.parse(localStorage.getItem("note") || "[]").slice().length < 12) {
+      const localNoteId = Date.now();
+      addNooteToLocalStorage(localNoteId, noteTitle.value, noteText.value);
     } else {
       actionNotification("Register to add more notes!", 3000);
     }
@@ -176,93 +166,16 @@ export function addNote(e) {
   clearNoteInput();
 }
 
-function addNooteToLocalStorage(id, title, content) {
-  const allNotes = getAllLocalNotes();
-  const note = {
-    id,
-    title,
-    content,
-  };
-  allNotes.push(note);
-  localStorage.setItem("note", JSON.stringify(allNotes));
-
-  showLocalNotes(allNotes);
-}
-
-function getAllLocalNotes() {
+export function getAllLocalNotes() {
   return JSON.parse(localStorage.getItem("note") || "[]");
 }
 
-// listen for auth status changes
-onAuthStateChanged(auth, fbListener);
-
-export function fbListener(user) {
-  if (user) {
-    isLogined = true;
-    onSnapshot(
-      collection(db, "users", `${user.uid}`, "notes"),
-      (snapshot) => {
-        setupNotesServer(snapshot.docs);
-        setupUI(user);
-        currentUserUid = user.uid;
-        console.log("User logined in: " + isLogined);
-      },
-      (error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(`Error code: ${errorCode} with msg: ${errorMessage}`);
-      }
-    );
-  } else {
-    isLogined = false;
-    setupUI();
-    console.log("User logined in: " + isLogined);
-  }
+export function authListener() {
+  onAuthStateChanged(auth, fbListener);
 }
 
-const accountInfo = document.querySelector(".account-info");
-const accountInfoEmail = accountInfo.querySelector(".account-info-email");
-
-function setupUI(user) {
-  if (user) {
-    //show user info
-    accountInfoEmail.innerHTML = `${user.email}`;
-    smoothActivation(accountInfo, 120);
-
-    // toggle user UI elements
-    document.querySelector(".btn-login").classList.remove("active");
-    smoothActivation(document.querySelector(".btn-login-out"), 240);
-  } else {
-    // hide user info
-    accountInfo.classList.remove("active");
-
-    // toggle user elements
-    document.querySelector(".btn-login-out").classList.remove("active");
-    smoothActivation(document.querySelector(".btn-login"), 240);
-  }
-}
-
-function setupNotesServer(data) {
-  if (data.length) {
-    let html = "";
-
-    moveIntroSection("top");
-    data.forEach((doc) => {
-      const note = doc.data();
-      const div = `
-      <div class="note" id="${doc.id}">
-        <i class="fas fa-times-circle"></i>
-        <h3>${note.title}</h3>
-        <p>${note.content.replace(/\n\r?/g, "<br />")}</p>
-      </div>`;
-      html += div;
-    });
-    notesArea.innerHTML = html;
-  }
-}
-
-function showLocalNotes(notes) {
-  // clearNoteBoard();
+export function showLocalNotes(notes) {
+  const notesArea = document.querySelector(".notes-wrapper");
   let html = "";
 
   moveIntroSection("top");
@@ -279,12 +192,15 @@ function showLocalNotes(notes) {
 }
 
 export function clearNoteBoard() {
+  const notesArea = document.querySelector(".notes-wrapper");
+
   if (notesArea.querySelector(".note")) {
     if (isLogined) {
       notesArea.querySelectorAll(".note").forEach((note) => {
         deleteDoc(doc(db, "users", currentUserUid, "notes", note.id))
           .then(() => {
             notesArea.innerHTML = "";
+            moveIntroSection("down");
           })
           .catch((error) => {
             const errorCode = error.code;
@@ -295,19 +211,18 @@ export function clearNoteBoard() {
     } else {
       localStorage.removeItem("note");
       notesArea.innerHTML = "";
+      moveIntroSection("down");
     }
     actionNotification("You successfully delete all notes!");
-    moveIntroSection("down");
   } else {
     actionNotification("There are no notes on the board!");
   }
 }
 
-// Delete notes by btn
-notesArea.addEventListener("click", deleteNote);
-
 export function deleteNote(e) {
+  const notesArea = document.querySelector(".notes-wrapper");
   let target = e.target;
+
   if (target.tagName != "I") return; // kick out if click not on close btn
 
   const note = target.parentNode;
@@ -335,4 +250,80 @@ export function deleteNote(e) {
       moveIntroSection("down");
     }
   }, 80);
+}
+
+function fbListener(user) {
+  if (user) {
+    isLogined = true;
+    onSnapshot(
+      collection(db, "users", `${user.uid}`, "notes"),
+      (snapshot) => {
+        setupNotesServer(snapshot.docs);
+        setupUI(user);
+        currentUserUid = user.uid;
+      },
+      (error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(`Error code: ${errorCode} with msg: ${errorMessage}`);
+      }
+    );
+  } else {
+    isLogined = false;
+    setupUI();
+  }
+}
+
+function addNooteToLocalStorage(id, title, content) {
+  const allNotes = getAllLocalNotes();
+  const note = {
+    id,
+    title,
+    content,
+  };
+  allNotes.push(note);
+  localStorage.setItem("note", JSON.stringify(allNotes));
+  showLocalNotes(allNotes);
+}
+
+function setupUI(user) {
+  const accountInfo = document.querySelector(".account-info");
+  const accountInfoEmail = accountInfo.querySelector(".account-info-email");
+
+  if (user) {
+    //show user info
+    accountInfoEmail.innerHTML = `${user.email}`;
+    smoothActivation(accountInfo, 120);
+
+    // toggle user UI elements
+    document.querySelector(".btn-login").classList.remove("active");
+    smoothActivation(document.querySelector(".btn-login-out"), 240);
+  } else {
+    // hide user info
+    accountInfo.classList.remove("active");
+
+    // toggle user elements
+    document.querySelector(".btn-login-out").classList.remove("active");
+    smoothActivation(document.querySelector(".btn-login"), 240);
+  }
+}
+
+function setupNotesServer(data) {
+  const notesArea = document.querySelector(".notes-wrapper");
+
+  if (data.length) {
+    let html = "";
+    moveIntroSection("top");
+    data.forEach((doc) => {
+      const note = doc.data();
+      const div = `
+      <div class="note" id="${doc.id}">
+        <i class="fas fa-times-circle"></i>
+        <h3>${note.title}</h3>
+        <p>${note.content.replace(/\n\r?/g, "<br />")}</p>
+      </div>`;
+      html += div;
+    });
+    notesArea.innerHTML = html;
+  }
 }

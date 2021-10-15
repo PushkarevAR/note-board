@@ -91,3 +91,26 @@ export function modalNotification(msg, showTime = 1000) {
       "You better do not forget your password, because there are no reset function for it. x0x0";
   }, showTime);
 }
+
+export function resizeInput(input) {
+  input.style.height = "120px";
+  let scHeight = input.scrollHeight;
+  if (scHeight > 120) input.style.height = `${scHeight}px`;
+}
+
+export function hideModal() {
+  document.querySelector(".modal").classList.remove("active");
+}
+
+export function showWindow(window) {
+  const loginWindow = document.querySelector(".login-window");
+  const signupWindow = document.querySelector(".signup-window");
+
+  if(window == "login") {
+    signupWindow.classList.remove("active");
+    smoothActivation(loginWindow, 360);
+  } else {
+    loginWindow.classList.remove("active");
+    smoothActivation(signupWindow, 360);
+  }
+}

@@ -1,13 +1,13 @@
 //-----------------------theme and colors changers-----------------------
-const colorSwitcherIcon = document.querySelector(".color-switcher-icon"),
-  colorSwitcherDropdown = document.querySelector(".color-switcher-dropdown");
+const colorSwitcherIcon = document.querySelector(".color-switcher-icon");
+const colorSwitcherDropdown = document.querySelector(".color-switcher-dropdown");
 
 colorSwitcherIcon.addEventListener("click", () => {
   colorSwitcherDropdown.classList.toggle("open");
 });
 
 window.addEventListener("click", (e) => {
-  // shitty KOSTILI
+  // BAD code 0_o
   if (
     e.target == document.querySelector("main") &&
     document.querySelector(".open")
@@ -20,7 +20,6 @@ const btnColors = document.querySelectorAll(".color"),
   root = document.querySelector(":root");
 
 const darkTheme = ["#1d1d1d", "#fcfcfc", "#181818", "rgb(43, 43, 43)"];
-
 const lightTheme = ["#fff", "#252525", "#f7f7f7", "rgb(235, 235, 235)"];
 
 const themeSwitcherIcon = document.querySelector(".theme-switcher-icon"),
