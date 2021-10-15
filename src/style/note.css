@@ -110,3 +110,9 @@
   margin: 0;
   float: right;
 }
+
+@media (max-width: 600px) {
+  .note.note-input {
+    min-width: 300px;
+  }
+}

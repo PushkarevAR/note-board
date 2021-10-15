@@ -40,7 +40,7 @@ export function smoothActivation(e, delay) {
 
 export function moveIntroSection(direction) {
   if (direction == "down") {
-    document.querySelector(".intro").style.marginTop = "20%";
+    document.querySelector(".intro").style.marginTop = "30%";
     document.querySelector(".notes-wrapper").style.visibility = "hidden";
   } else if (direction == "top") {
     document.querySelector(".intro").style.marginTop = "100px";

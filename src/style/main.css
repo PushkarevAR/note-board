@@ -73,13 +73,39 @@ main {
 }
 /* ---------------------------- Media ---------------------------- */
 @media (max-width: 1100px) {
+  header{
+    background-color: none;
+  }
+
   .intro {
     flex-wrap: wrap;
     justify-content: center;
+    margin-top: 100px;
   }
 
   .intro .intro-text{
     margin-right: 0;
     text-align: center;
+  }
+
+  .intro .intro-text p{
+    font-size: .75rem;
+  }
+
+  .intro .intro-text h1{
+    font-size: 1.5rem;
+    line-height: 1.5rem;;
+  }
+}
+
+@media (max-width: 600px) {
+  .intro .intro-btn-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .intro .intro-text p.notification{
+    display: none;
   }
 }
