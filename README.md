@@ -10,6 +10,9 @@ Note Board is note-taking service.
 - Sort notes by drag.
 - Dark/light theme and color preference.
 
+## Screenshots
+![Note Board desktop view -main](http://full/path/to/img.jpg "desktop-main")
+
 ## Used technologies and dependencies
 
 - Firebase SDK 9.1.1
