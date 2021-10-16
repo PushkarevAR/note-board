@@ -11,7 +11,7 @@ Note Board is note-taking service.
 - Dark/light theme and color preference.
 
 ## Screenshots
-![Note Board desktop view -main](http://full/path/to/img.jpg?raw=true)
+![Note Board desktop view -main](https://i.postimg.cc/8cqLgzVj/notes-pc.png)
 
 ## Used technologies and dependencies
 
