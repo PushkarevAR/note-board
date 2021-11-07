@@ -1,6 +1,6 @@
 # Note Board
 
-Note Board is note-taking service.
+Note board is simple note-taking service, that allows you to create notes extremely fast even without any registration. And you also can sync your notes by using personal account.
 
 ## Features
 
@@ -10,8 +10,10 @@ Note Board is note-taking service.
 - Sort notes by drag.
 - Dark/light theme and color preference.
 
+ps. current limits: 12 local notes and 300 symbols input limit.
+
 ## Screenshots
-<img src="https://i.postimg.cc/nhJ57vXS/notes-pc-large.png" alt="Note Board desktop view -login" height="520"/> <img src="https://i.postimg.cc/DZwrqNgy/login-mobile.png" alt="Note Board mobile view -login" height="520"/> <img src="https://i.postimg.cc/ZRsrjL7P/notes-mobile.png" alt="Note Board mobile view -main" height="520"/>
+<img src="https://user-images.githubusercontent.com/85485508/140637995-31586a23-c59f-4312-8ef7-f4ff848a05a8.png" alt="Note Board prev" height="520"/>
 
 
 
