@@ -13,7 +13,7 @@ Note board is simple note-taking service, that allows you to create notes extrem
 ps. current limits: 12 local notes and 300 symbols input limit.
 
 ## Screenshots
-<img src="https://user-images.githubusercontent.com/85485508/140637995-31586a23-c59f-4312-8ef7-f4ff848a05a8.png" alt="Note Board prev" height="520"/>
+<img src="https://user-images.githubusercontent.com/85485508/140637995-31586a23-c59f-4312-8ef7-f4ff848a05a8.png" alt="Note Board prev"/>
 
 
 
