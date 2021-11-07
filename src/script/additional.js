@@ -40,7 +40,8 @@ export function smoothActivation(e, delay) {
 
 export function moveIntroSection(direction) {
   if (direction == "down") {
-    document.querySelector(".intro").style.marginTop = "30%";
+    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+    if (vw > 600) document.querySelector(".intro").style.marginTop = "20%";
     document.querySelector(".notes-wrapper").style.visibility = "hidden";
   } else if (direction == "top") {
     document.querySelector(".intro").style.marginTop = "100px";
@@ -51,7 +52,7 @@ export function moveIntroSection(direction) {
 export function validated(input) {
   const counter = document.querySelector(".input-length");
   const btn = document.querySelector(".btn-add-note");
-  const inputLimit = 100;
+  const inputLimit = 300;
   const inputLength = input.value.length;
 
   if (inputLength != 0) {
@@ -106,7 +107,7 @@ export function showWindow(window) {
   const loginWindow = document.querySelector(".login-window");
   const signupWindow = document.querySelector(".signup-window");
 
-  if(window == "login") {
+  if (window == "login") {
     signupWindow.classList.remove("active");
     smoothActivation(loginWindow, 360);
   } else {

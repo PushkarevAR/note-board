@@ -99,6 +99,10 @@ main {
 }
 
 @media (max-width: 600px) {
+  .intro{
+    margin-top: 100px;
+  }
+
   .intro .intro-btn-container{
     display: flex;
     align-items: center;
